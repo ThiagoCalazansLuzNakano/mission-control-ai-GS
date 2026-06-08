@@ -69,7 +69,7 @@ pip install -r requirements.txt
 
 ### 2. Configurar a chave da API
 ```bash
-cp .env.example .env
+cp .env .env
 # Edite o .env e insira sua OLLAMA_API_KEY
 ```
 

@@ -1,34 +1,31 @@
+import pyfiglet
 from rich.console import Console
+from rich.align import Align
 from rich.text import Text
-from rich.panel import Panel
-from rich import box
 
 console = Console()
 
-BANNER = r"""
-    ___   ___  ____  ____  ____    __   ____  
-   / _ | / _ \/ __ \/ __ \/ __/  / /  / __/  
-  / __ |/ , _/ /_/ / /_/ /\ \   / /___\ \    
- /_/ |_/_/|_|\____/\____/___/  /____/___/    
-  __  __ ___________ _____  __  __           
- /  |/  /  _/ __/ __/  _/ \  \/ /           
-/ /|_/ // /_\ \_\ \ _/ /   \   /            
-/_/  /_/___/___/___/___/   /_/             
-   ___  ____  _  ________________  __ 
-  / _ |/ __ \/ |/ /_  __/ __/ __ \/ / 
- / __ / /_/ /    / / / / _// /_/ / /__
-/_/ |_\____/_/|_/ /_/ /___/\____/____/
-"""
+# Gera as duas linhas do banner em ASCII art
+linha1 = pyfiglet.figlet_format("Global Solution", font="ansi_shadow")
+linha2 = pyfiglet.figlet_format("Mission Control AI", font="ansi_shadow")
 
-def print_banner():
-    console.print(f"[bold green]{BANNER}[/bold green]")
-    console.print(
-        Panel.fit(
-            "[bold white]🛰️  AgroSat Mission Control AI[/bold white]\n"
-            "[dim]Monitoramento Inteligente de Satélite de Sensoriamento Agrícola[/dim]\n"
-            "[dim]Global Solution 2026.1 — FIAP[/dim]",
-            border_style="green",
-            box=box.DOUBLE,
-        )
-    )
-    console.print()
+# Pinta em ciano (estilo Claude Code) e centraliza
+console.print(Align.center(Text(linha1, style="bold #A855F7")))
+console.print(Align.center(Text(linha2, style="bold #06B6D4")))
+console.print(Align.center(
+    Text("── 2026.1 · Prompt Engineering and AI · FIAP ──",
+    style="italic #8484A0")
+))
+
+# Rodar o banner padrão
+#$ python banner_ascii.py
+
+# Listar as 570+ fontes disponíveis no PyFiglet
+#$ python banner_ascii.py --fonts
+
+# Testar uma fonte específica
+#$ python banner_ascii.py --font slant --text "Mission Control AI"
+
+# Demonstrar 8 fontes diferentes lado a lado
+#$ python banner_ascii.py --demo
+

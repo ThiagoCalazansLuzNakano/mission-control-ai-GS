@@ -1,3 +1,8 @@
-openai==1.30.5
+# Dependências mínimas
+ollama==0.4.7
 python-dotenv==1.0.1
-rich==13.7.1
+# Opcional
+#rich ==13.9.4 (terminal bonito)
+#pandas ==2.2.3 (manipulacao de dados)
+#matplotlib ==3.9.2 (graficos)
+

@@ -1,3 +1,12 @@
+
+
+
+
+#Implementar
+#src/telemetria.py com 3-4 parâmetros simulados
+#código seginte errado
+
+
 """
 telemetria.py
 Geração de dados simulados de telemetria do AgroSat.
@@ -10,12 +19,6 @@ Parâmetros monitorados (Trilha 1 — AgroSat):
   - attitude_stability    : Estabilidade de atitude — % (100 = perfeita)
 """
 
-import random
-import datetime
-from dataclasses import dataclass, asdict
-
-
-@dataclass
 class TelemetriaAgroSat:
     timestamp: str
     ndvi_sensor_health: float      # %        | normal: 85-100
@@ -26,9 +29,6 @@ class TelemetriaAgroSat:
 
     def to_dict(self) -> dict:
         return asdict(self)
-
-
-# ── Cenários pré-definidos ──────────────────────────────────────────────────
 
 CENARIOS = {
     "normal": {

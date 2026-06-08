@@ -1,12 +1,21 @@
+
+
+
+
+
+#Implementar src/alertas.py com 2-3 regras
+#de threshold
+#código seginte errado
+
+
+
+
+
 """
 alertas.py
 Thresholds e regras de decisão para o AgroSat.
 Toda a lógica condicional é feita em Python — a IA só interpreta.
 """
-
-from dataclasses import dataclass
-from typing import List
-from src.telemetria import TelemetriaAgroSat
 
 
 # ── Níveis de severidade ────────────────────────────────────────────────────
