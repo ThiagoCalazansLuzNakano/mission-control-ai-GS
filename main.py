@@ -19,7 +19,7 @@ from src import ui
 
 
 def executar_ciclo(cenario: str):
-    """Executa um ciclo completo: gera telemetria → avalia alertas → IA → chat."""
+    """#Executa um ciclo completo: gera telemetria → avalia alertas → IA → chat."""
 
     # 1. Gerar dados de telemetria
     t = gerar_telemetria(cenario)
@@ -52,7 +52,7 @@ def main():
         cenario = ui.menu_cenario()
 
         if cenario == "sair":
-            console.print("\n[bold green]👋 Encerrando Mission Control AI. Boa missão![/bold green]\n")
+            console.print("\n[bold green]👋 Encerrando Mission Control AI. Boa missão capitão![/bold green]\n")
             sys.exit(0)
 
         executar_ciclo(cenario)
