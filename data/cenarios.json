@@ -1,0 +1,48 @@
+{
+  "cenarios": [
+    {
+      "nome": "Operação Normal",
+      "descricao": "Todos os sistemas dentro dos limites operacionais.",
+      "dados": {
+        "ndvi_sensor_health": 96.3,
+        "payload_temp_c": 22.1,
+        "storage_used_pct": 45.0,
+        "downlink_window_min": 18.5,
+        "attitude_stability": 98.2
+      }
+    },
+    {
+      "nome": "Sobrecarga Térmica",
+      "descricao": "Temperatura do payload acima do limite crítico — risco de dano ao sensor óptico.",
+      "dados": {
+        "ndvi_sensor_health": 91.0,
+        "payload_temp_c": 61.4,
+        "storage_used_pct": 55.0,
+        "downlink_window_min": 14.0,
+        "attitude_stability": 97.0
+      }
+    },
+    {
+      "nome": "Storage Crítico + Downlink Reduzido",
+      "descricao": "Buffer quase cheio e janela de downlink insuficiente — risco de perda de imagens.",
+      "dados": {
+        "ndvi_sensor_health": 88.0,
+        "payload_temp_c": 28.0,
+        "storage_used_pct": 93.5,
+        "downlink_window_min": 2.1,
+        "attitude_stability": 95.0
+      }
+    },
+    {
+      "nome": "Falha Múltipla",
+      "descricao": "NDVI degradado, instabilidade de atitude e armazenamento crítico simultaneamente.",
+      "dados": {
+        "ndvi_sensor_health": 42.0,
+        "payload_temp_c": 31.0,
+        "storage_used_pct": 91.0,
+        "downlink_window_min": 6.5,
+        "attitude_stability": 74.0
+      }
+    }
+  ]
+}
