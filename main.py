@@ -1,7 +1,7 @@
 """
-main.py
-Ponto de entrada do AgroSat Mission Control AI.
-Execute: python main.py
+#main.py
+#Ponto de entrada do AgroSat Mission Control AI.
+#Execute: python main.py
 """
 
 import sys
