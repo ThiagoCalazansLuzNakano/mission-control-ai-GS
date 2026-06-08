@@ -1,82 +1,66 @@
-# 🛰️ AgroSat Mission Control AI
+# AgroSat Mission Control AI
 
-**Global Solution 2026.1 — FIAP**  
+**Global Solution**  
 **Trilha 1 — AgroSat: Sensoriamento Agrícola**
 
 ---
 
-## 👥 Grupo
+##  Grupo
 
-| Nome | RM |
-|------|----|
-| *(Integrante 1)* | RM XXXXX |
-| *(Integrante 2)* | RM XXXXX |
-| *(Integrante 3)* | RM XXXXX |
+| Nome            | RM        |
+|-----------------|-----------|
+| *Thiago nakano* | RM 569151 |
+| *Leticia okano* | RM 571988 |
+| *Enzo furtado*  | RM 570824 |
 
 ---
 
-## 🎯 Proposta de Valor
+##  O que o projeto faz
 
-O **AgroSat Mission Control AI** é um sistema de monitoramento operacional inteligente para satélites de sensoriamento agrícola. Ele recebe dados simulados de telemetria do **AgroSat-1** — um satélite multiespectral em órbita baixa —, detecta anomalias via lógica Python e analisa o estado da missão em linguagem natural usando IA generativa.
+O *AgroSat Mission Control AI* é um sistema de monitoramento operacional de satélite de sensoriamento agrícola que recebe dados simulados de telemetria do AgroSat-1, detecta anomalias em tempo real via lógica Python e gera diagnósticos em linguagem natural usando IA generativa (Ollama Cloud). A IA é integrada diretamente ao fluxo de análise: após cada leitura de telemetria, o modelo gpt-oss:120b recebe os dados brutos e os alertas detectados pelo código Python e produz uma análise contextualizada com nível de risco, impacto terrestre e ações recomendadas — além de estar disponível em modo chat para perguntas livres do operador.
 
 ### Personas atendidas
 | Persona | O que precisa |
 |---------|--------------|
-| 🔧 Engenheiro de Operações | Diagnósticos técnicos e ações imediatas |
-| 🌾 Produtor Rural | Saber se os dados NDVI da sua área estão confiáveis |
-| 📋 Analista de Seguro Agrícola | Verificar se a qualidade dos dados compromete laudos de sinistro |
+|  Engenheiro de Operações | Diagnósticos técnicos e ações imediatas |
+|  Produtor Rural | Saber se os dados NDVI da sua área estão confiáveis |
+|  Analista de Seguro Agrícola | Verificar se a qualidade dos dados compromete laudos de sinistro |
 
 ---
 
-## 🛰️ Parâmetros Monitorados
+##  Tecnologias utilizadas
 
-| Parâmetro | Faixa Normal | Alerta | Crítico |
-|-----------|-------------|--------|---------|
-| NDVI Sensor Health | 85–100% | < 85% | < 60% |
-| Temperatura do Payload | -10°C a 40°C | > 40°C / < -10°C | > 55°C / < -20°C |
-| Storage a Bordo | 0–80% | > 80% | > 90% |
-| Janela de Downlink | 8–30 min | < 8 min | < 3 min |
-| Estabilidade de Atitude | 92–100% | < 92% | < 80% |
+- Python 3.10+
+- Ollama Cloud API (modelo gpt-oss:120b)
+- Bibliotecas: openai, python-dotenv, rich
 
 ---
 
-## ⚙️ Stack Técnica
+## System Prompt
 
-| Componente | Tecnologia |
-|------------|-----------|
-| Linguagem | Python 3.10+ |
-| IA Generativa | Ollama Cloud API — `gpt-oss:120b` |
-| SDK API | `openai` (compatível com Ollama Cloud) |
-| Interface CLI | `rich` |
-| Config | `python-dotenv` |
+Arquivo completo em prompts/system_prompt.md
 
+Você apoia três personas terrestres:
+1. Engenheiro de Operações — diagnósticos técnicos e ações imediatas.
+2. Produtor Rural — saber se os dados NDVI da sua área estão confiáveis.
+3. Analista de Seguro Agrícola — verificar se os dados comprometem laudos.
+
+Parâmetros monitorados e faixas normais:
+- NDVI Sensor Health  : 85–100%      | alerta < 85%  | crítico < 60%
+- Temperatura Payload : -10°C a 40°C | alerta > 40°C | crítico > 55°C
+- Storage a Bordo     : 0–80%        | alerta > 80%  | crítico > 90%
+- Janela de Downlink  : 8–30 min     | alerta < 8min | crítico < 3min
+- Estab. de Atitude   : 92–100%      | alerta < 92%  | crítico < 80%
+
+Diretrizes:
+- Cite sempre o parâmetro anômalo e o valor atual.
+- Explique o impacto concreto para o setor agrícola.
+- Indique o nível de urgência: NORMAL, ALERTA ou CRÍTICO.
+- Sugira uma ação recomendada clara e objetiva.
+- Responda sempre em português brasileiro.
 ---
 
-## 📁 Estrutura do Projeto
-
-```
-mission-control-ai/
-├── main.py                  # Entrada do sistema
-├── banner_ascii.py          # Banner ASCII do sistema
-├── requirements.txt         # Dependências
-├── .env.example             # Template das variáveis de ambiente
-├── .env                     # Chave Ollama (não commitar)
-├── .gitignore
-├── src/
-│   ├── __init__.py
-│   ├── telemetria.py        # Geração de dados simulados
-│   ├── alertas.py           # Thresholds e regras de decisão
-│   ├── engine.py            # Motor de análise com IA
-│   └── ui.py                # Interface CLI Rich
-├── prompts/
-│   └── system_prompt.md     # System prompt da IA
-└── data/
-    └── cenarios.json        # Cenários pré-definidos para teste
-```
-
----
-
-## 🚀 Como Executar
+## Como Executar
 
 ### 1. Instalar dependências
 ```bash
@@ -96,30 +80,20 @@ python main.py
 
 ---
 
-## 🔄 Fluxo do Sistema
+##  Cenários de teste demonstrados
 
-```
-[Usuário escolhe cenário]
-        ↓
-[telemetria.py] → Gera dados simulados do AgroSat-1
-        ↓
-[alertas.py]    → Avalia thresholds com lógica Python (if/elif/else)
-        ↓
-[engine.py]     → Monta contexto + chama Ollama Cloud API
-        ↓
-[ui.py]         → Exibe telemetria, alertas e análise da IA via Rich CLI
-        ↓
-[Loop Chat]     → Usuário pode fazer perguntas livres à IA
-```
+1. Operação normal — todos os parâmetros dentro da faixa operacional
+2. Sobrecarga térmica — temperatura do payload acima de 55°C; risco de dano permanente ao sensor óptico
+3. Storage crítico + downlink reduzido — buffer acima de 90% com janela de transmissão abaixo de 3 min; risco de perda de imagens
+4. Falha múltipla — NDVI degradado abaixo de 60%, instabilidade de atitude abaixo de 80% e storage crítico simultaneamente
 
 ---
 
-## 🌾 Impacto Terrestre
+## Limitações conhecidas
 
-Cada alerta detectado é traduzido para impacto real no setor agrícola brasileiro:
-
-- **NDVI degradado** → índices de vegetação imprecisos para produtores e analistas de seguro
-- **Temperatura crítica** → risco de dano permanente ao sensor óptico; interrupção do serviço
-- **Storage cheio** → perda de imagens de talhões; lacunas em plataformas como Climate FieldView
-- **Downlink reduzido** → atraso na entrega de dados para decisões de plantio e colheita
-- **Instabilidade de atitude** → imagens com motion blur; mapas de precisão comprometidos
+- Os dados de telemetria são simulados (gerados por random.uniform) e não provêm de um satélite real
+- O sistema não possui persistência de histórico entre sessões — cada execução começa do zero
+- O modo chat mantém histórico apenas dentro da sessão atual; ao reiniciar o cenário, o contexto é perdido
+- Não há interface gráfica — o sistema opera exclusivamente via CLI
+- A análise da IA depende de conexão com a internet para acessar a Ollama Cloud API
+- O sistema não se conecta a APIs externas de dados agrícolas reais (Climate FieldView, Embrapa Monitora etc.)

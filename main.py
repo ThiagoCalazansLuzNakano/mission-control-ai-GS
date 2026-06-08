@@ -1,7 +1,7 @@
 """
-#main.py
-#Ponto de entrada do AgroSat Mission Control AI.
-#Execute: python main.py
+main.py
+Ponto de entrada do AgroSat Mission Control AI.
+Execute: python main.py
 """
 
 import sys
@@ -19,7 +19,7 @@ from src import ui
 
 
 def executar_ciclo(cenario: str):
-    """#Executa um ciclo completo: gera telemetria → avalia alertas → IA → chat."""
+    """Executa um ciclo completo: gera telemetria → avalia alertas → IA → chat."""
 
     # 1. Gerar dados de telemetria
     t = gerar_telemetria(cenario)
