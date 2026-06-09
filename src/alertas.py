@@ -2,7 +2,6 @@ from dataclasses import dataclass
 from typing import List
 from src.telemetria import TelemetriaAgroSat
 
-
 # Níveis de Alerta
 NIVEL_OK = "OK"
 NIVEL_ALERTA = "ALERTA"
@@ -18,18 +17,15 @@ class Alerta:
 
 def avaliar_telemetria(t: TelemetriaAgroSat) -> List[Alerta]:
 
-  alertas = []
+    alertas = []
 
-        # NDVI Sensor Health
+    # NDVI Sensor Health
     if t.ndvi_sensor_health <= 60:
             nivel = NIVEL_CRITICO
-
     elif t.ndvi_sensor_health <= 85:
             nivel = NIVEL_ALERTA
-
     else:
             nivel = NIVEL_OK
-
     if nivel != NIVEL_OK:
             alertas.append(
                 Alerta(
@@ -40,20 +36,17 @@ def avaliar_telemetria(t: TelemetriaAgroSat) -> List[Alerta]:
                     impacto_terrestre=(
                         "Imagens agrícolas podem apresentar baixa qualidade, "
                         "prejudicando a análise das plantações."
+                    )
                 )
             )
-        )
 
     # Temperatura do Payload
     if t.payload_temp_c >= 55 or t.payload_temp_c <= -20:
             nivel = NIVEL_CRITICO
-
     elif t.payload_temp_c >= 40 or t.payload_temp_c <= -10:
             nivel = NIVEL_ALERTA
-
     else:
             nivel = NIVEL_OK
-
     if nivel != NIVEL_OK:
             alertas.append(
                 Alerta(
@@ -64,20 +57,17 @@ def avaliar_telemetria(t: TelemetriaAgroSat) -> List[Alerta]:
                     impacto_terrestre=(
                         "O sensor pode sofrer danos e comprometer a captura "
                         "de imagens das áreas agrícolas."
+                    )
                 )
             )
-        )
 
     # Armazenamento
     if t.storage_used_pct >= 90:
             nivel = NIVEL_CRITICO
-
     elif t.storage_used_pct >= 80:
             nivel = NIVEL_ALERTA
-
     else:
             nivel = NIVEL_OK
-
     if nivel != NIVEL_OK:
             alertas.append(
                 Alerta(
@@ -87,20 +77,17 @@ def avaliar_telemetria(t: TelemetriaAgroSat) -> List[Alerta]:
                     mensagem=f"Uso de armazenamento em {t.storage_used_pct:.1f}%",
                     impacto_terrestre=(
                         "Imagens importantes podem ser perdidas por falta de espaço."
+                    )
                 )
             )
-        )
 
 # Janela de Downlink
     if t.downlink_window_min <= 3:
             nivel = NIVEL_CRITICO
-
     elif t.downlink_window_min <= 8:
             nivel = NIVEL_ALERTA
-
     else:
             nivel = NIVEL_OK
-
     if nivel != NIVEL_OK:
             alertas.append(
                 Alerta(
@@ -110,20 +97,17 @@ def avaliar_telemetria(t: TelemetriaAgroSat) -> List[Alerta]:
                     mensagem=f"Janela de comunicação reduzida: {t.downlink_window_min:.1f} min",
                     impacto_terrestre=(
                         "Os dados podem demorar para chegar aos usuários na Terra."
+                    )
                 )
             )
-        )
 
 # Estabilidade de Atitude
     if t.attitude_stability <= 80:
          nivel = NIVEL_CRITICO
-
     elif t.attitude_stability <= 92:
-         nivel = NIVEL_ALERTA
-
+        nivel = NIVEL_ALERTA
     else:
         nivel = NIVEL_OK
-
         if nivel != NIVEL_OK:
             alertas.append(
                 Alerta(
@@ -133,11 +117,10 @@ def avaliar_telemetria(t: TelemetriaAgroSat) -> List[Alerta]:
                     mensagem=f"Estabilidade reduzida: {t.attitude_stability:.1f}%",
                     impacto_terrestre=(
                         "As imagens podem sair borradas ou imprecisas."
+                    )
                 )
             )
-        )
     return alertas
-
 
 
 def nivel_geral(alertas: List[Alerta]) -> str:
