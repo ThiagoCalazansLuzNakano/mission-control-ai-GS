@@ -138,7 +138,6 @@ if t.attitude_stability <= 80:
 
     return alertas
 
-
 def nivel_geral(alertas: List[Alerta]) -> str:
 
     for alerta in alertas:
@@ -150,7 +149,6 @@ def nivel_geral(alertas: List[Alerta]) -> str:
             return NIVEL_ALERTA
 
     return NIVEL_OK
-
 
 def acao_automatica(alertas: List[Alerta]) -> str:
 
@@ -175,30 +173,20 @@ def acao_automatica(alertas: List[Alerta]) -> str:
 
     return "Nenhuma ação automática necessária."
 
-
 def cor_nivel(nivel: str) -> str:
-
     if nivel == NIVEL_OK:
         return "green"
-
     if nivel == NIVEL_ALERTA:
         return "yellow"
-
     if nivel == NIVEL_CRITICO:
         return "red"
-
     return "white"
 
-
 def emoji_nivel(nivel: str) -> str:
-
     if nivel == NIVEL_OK:
         return "✅"
-
     if nivel == NIVEL_ALERTA:
         return "⚠️"
-
     if nivel == NIVEL_CRITICO:
         return "🚨"
-
     return "❓"
