@@ -1,12 +1,4 @@
 
-
-
-
-#Implementar
-#src/telemetria.py com 3-4 parâmetros simulados
-#código seginte errado
-
-
 """
 telemetria.py
 Geração de dados simulados de telemetria do AgroSat.
@@ -18,7 +10,11 @@ Parâmetros monitorados (Trilha 1 — AgroSat):
   - downlink_window_min   : Janela de downlink disponível — minutos
   - attitude_stability    : Estabilidade de atitude — % (100 = perfeita)
 """
+import random
+import datetime
+from dataclasses import dataclass, asdict
 
+@dataclass
 class TelemetriaAgroSat:
     timestamp: str
     ndvi_sensor_health: float      # %        | normal: 85-100
