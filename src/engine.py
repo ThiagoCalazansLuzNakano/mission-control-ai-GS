@@ -4,7 +4,7 @@ from ollama import Client
 from dotenv import load_dotenv
 from pathlib import Path
 from src.telemetria import gerar_telemetria, formatar_telemetria
-from src.alertas import avaliar_telemetria, nivel_geral, NIVEL_CRITICO
+from src.alertas import avaliar_telemetria, nivel_geral, acao_automatica,  NIVEL_CRITICO
 
 load_dotenv()
 
@@ -123,33 +123,32 @@ class MissionEngine:
             if acoes:
                 linhas.append("")
                 linhas.append(acoes)
-
             return "\n".join(linhas)
 
         def analyze(self, pergunta_usuario: str) -> str:
-                """Analisa a pergunta com base na telemetria + alertas + IA."""
+            """Analisa a pergunta com base na telemetria + alertas + IA."""
 
             # 1. Coletar dados via src.telemetria
             t = self._telemetria
-                alertas = self._alertas
+            alertas = self._alertas
 
             # 2. Avaliar alertas e montar bloco de texto
             if alertas:
-                    alertas_txt = ""
-                    for a in alertas:
-                        alertas_txt += (
-                            f"\n  [{a.nivel}] {a.parametro}: {a.mensagem}"
-                            f"\n  Impacto terrestre: {a.impacto_terrestre}\n"
-                        )
-                else:
-                    alertas_txt = "\n  Todos os parâmetros dentro da faixa normal.\n"
+                alertas_txt = ""
+                for a in alertas:
+                    alertas_txt += (
+                        f"\n  [{a.nivel}] {a.parametro}: {a.mensagem}"
+                        f"\n  Impacto terrestre: {a.impacto_terrestre}\n"
+                    )
+            else:
+                alertas_txt = "\n  Todos os parâmetros dentro da faixa normal.\n"
 
-                # Inclui ações automáticas já executadas no contexto
-                acoes = self._respostas_automatizadas()
-                bloco_acoes = f"\nAções automáticas já executadas:\n{acoes}\n" if acoes else ""
+            # Inclui ações automáticas já executadas no contexto
+            acoes = self._respostas_automatizadas()
+            bloco_acoes = f"\nAções automáticas já executadas:\n{acoes}\n" if acoes else ""
 
-                # 3. Montar prompt com dados + alertas + pergunta do operador
-                prompt = f"""
+            # 3. Montar prompt com dados + alertas + pergunta do operador
+            prompt = f"""
         === TELEMETRIA AGROSAT-1 ===
         Timestamp         : {t.timestamp}
         NDVI Sensor Health: {t.ndvi_sensor_health:.1f}%
@@ -163,6 +162,6 @@ class MissionEngine:
         {pergunta_usuario}
         """
 
-        # 4. Chamar llm com o system prompt customizado
-        # 5. Retornar a resposta
-    return llm(prompt, system=self.system_prompt)
+            # 4. Chamar llm com o system prompt customizado
+            # 5. Retornar a resposta
+            return llm(prompt, system=self.system_prompt)

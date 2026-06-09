@@ -19,7 +19,7 @@ def avaliar_telemetria(t: TelemetriaAgroSat) -> List[Alerta]:
 
     alertas = []
 
-    # NDVI Sensor Health
+     # NDVI Sensor Health
     if t.ndvi_sensor_health <= 60:
             nivel = NIVEL_CRITICO
     elif t.ndvi_sensor_health <= 85:
