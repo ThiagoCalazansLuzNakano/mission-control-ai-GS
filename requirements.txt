@@ -1,6 +1,9 @@
 # Dependências mínimas
 ollama==0.4.7
 python-dotenv==1.0.1
+rich==13.9.4
+prompt-toolkit==3.0.48
+pyfiglet==1.0.2
 # Opcional
 #rich ==13.9.4 (terminal bonito)
 #pandas ==2.2.3 (manipulacao de dados)
