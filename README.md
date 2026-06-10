@@ -73,15 +73,17 @@ cp .env .env
 # Edite o .env e insira sua OLLAMA_API_KEY
 ```
 
-### 3. Executar o sistema
+### 3. Entrar no cmd e abrir o projeto, após isso colocar
 ```bash
+.venv\Scripts\activate
+# após dar enter adicionar:
 python main.py
 ```
 
 ---
 
 ##  Cenários de teste demonstrados
-
+Na teoria:
 1. Operação normal — todos os parâmetros dentro da faixa operacional
 2. Sobrecarga térmica — temperatura do payload acima de 55°C; risco de dano permanente ao sensor óptico
 3. Storage crítico + downlink reduzido — buffer acima de 90% com janela de transmissão abaixo de 3 min; risco de perda de imagens
@@ -92,8 +94,5 @@ python main.py
 ## Limitações conhecidas
 
 - Os dados de telemetria são simulados (gerados por random.uniform) e não provêm de um satélite real
-- O sistema não possui persistência de histórico entre sessões — cada execução começa do zero
-- O modo chat mantém histórico apenas dentro da sessão atual; ao reiniciar o cenário, o contexto é perdido
-- Não há interface gráfica — o sistema opera exclusivamente via CLI
 - A análise da IA depende de conexão com a internet para acessar a Ollama Cloud API
-- O sistema não se conecta a APIs externas de dados agrícolas reais (Climate FieldView, Embrapa Monitora etc.)
+
