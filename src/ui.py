@@ -7,7 +7,7 @@ from prompt_toolkit import PromptSession
 from prompt_toolkit.styles import Style
 import pyfiglet
 from datetime import datetime
-
+from rich.console import Console
 console = Console()
 
 def get_session():
