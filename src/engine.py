@@ -12,7 +12,7 @@ load_dotenv()
 TRILHA = "agrosat"  # "envirosat" | "connectsat" | "mobilitysat"
 
 client = Client(
-    host="https: /ollama.com",
+    host="https://ollama.com",
     headers={'Authorization': 'Bearer ' + os.environ.get('OLLAMA_API_KEY', '')}
 )
 

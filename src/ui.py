@@ -9,7 +9,11 @@ import pyfiglet
 from datetime import datetime
 
 console = Console()
-session = PromptSession(style=Style.from_dict({"prompt": "#06B6D4 bold"}))
+
+def get_session():
+    return PromptSession(
+        style=Style.from_dict({"prompt": "#06B6D4 bold"}))
+#session = PromptSession(style=Style.from_dict({"prompt": "#06B6D4 bold"}))
 
 def show_banner():
     """Exibe banner ASCII colorido no início."""
@@ -29,6 +33,7 @@ def show_response(text):
                         subtitle=now, border_style="#06B6D4"))
 
 def run_cli(engine):
+    session = get_session()
     """Loop principal da CLI."""
     show_banner()
     if not engine.is_ready():
